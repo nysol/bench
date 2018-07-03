@@ -1,11 +1,12 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-/estimation.csv 
+# -*- coding: utf-8 -*-/
 import os
 import xlrd
 from numpy.random import *
 from datetime import datetime,timedelta
 import urllib.request
 import nysol.mod as nm
+##### import nysol.mcmd as nm
 
 debug="on"
 datPath="./DATA"

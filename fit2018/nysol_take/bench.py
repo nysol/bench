@@ -12,7 +12,7 @@ from orangecontrib.associate.fpgrowth import *
 loop=5
 
 iPath=root="./DATA"
-oPath=root="./RESULTS"
+oPath=root="./OUTPUTS/bench"
 os.system("mkdir -p %s"%(oPath))
 oFile="%s/bench_%d.txt"%(oPath,loop)
 

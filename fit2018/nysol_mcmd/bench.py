@@ -4,16 +4,18 @@ import os
 import sys
 import time
 from pprint import pprint
+from datetime import datetime
 from glob import glob
-import math
 
 import pandas as pd
+import math
 import nysol.mod as nm
+##### import nysol.mcmd as nm
 
-loop=1
+loop=5
 
 iPath=root="./DATA"
-oPath=root="./RESULTS"
+oPath=root="./OUTPUT/bench"
 os.system("mkdir -p %s"%(oPath))
 oFile="%s/price_%d.txt"%(oPath,loop)
 
@@ -55,7 +57,7 @@ def nm2a(iFile):
 	f=None
 	f <<= nm.mcut(f="id,date,c",i=iFile)
 	f <<= nm.mwindow(k="id",wk="date:win",t=3)
-	f <<= nm.mavg(k="id,win",f="c",o="output_nm2.csv")
+	f <<= nm.mavg(k="id,win",f="c",o="%s/output_nm2.csv"%oPath)
 	r=f.run()
 	#print(r)
 
@@ -70,7 +72,6 @@ def pd3(iFile):
 		r[1]+=dfh[idx] if not math.isnan(dfh[idx]) else 0.0
 		r[2]+=dfl[idx] if not math.isnan(dfl[idx]) else 0.0
 		r[3]+=dfc[idx] if not math.isnan(dfc[idx]) else 0.0
-	#print(r)
 
 def pd3a(iFile):
 	df = pd.read_csv(iFile,dtype=t)
@@ -82,14 +83,12 @@ def pd3a(iFile):
 		r[1]+=dfh[idx] if not math.isnan(dfh[idx]) else 0.0
 		r[2]+=dfl[idx] if not math.isnan(dfl[idx]) else 0.0
 		r[3]+=dfc[idx] if not math.isnan(dfc[idx]) else 0.0
-	#print(r)
 
 def nm3(iFile):
 	r=[0.0,0.0,0.0,0.0]
 	for line in nm.mnullto(f="*",v=0,i=iFile).convtype(t):
 		r[0]+= line[2];r[1]+= line[3]
 		r[2]+= line[4];r[3]+= line[5]
-	#print(r)
 
 sec={}
 mean={}
