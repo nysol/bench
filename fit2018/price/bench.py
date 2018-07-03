@@ -145,6 +145,6 @@ print("write to: ",oFile)
 with open(oFile, "w") as file:
 	pprint(sys.argv[0], stream=file)
 	pprint(loop, stream=file)
-	pprint(t, stream=file)
+	pprint(sec, stream=file)
 	pprint(mean, stream=file)
 
