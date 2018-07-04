@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*-/
 from datetime import datetime,timedelta
 import nysol.mod as nm
+import numpy as np
+import os
+
 ##### import nysol.mcmd as nm
-
-
 def mkData(oFile):
 	np.random.seed(seed=32)
 	startDate=datetime(2018, 6, 29)
@@ -42,6 +43,9 @@ def mkIndex(oFile,iFile):
 	f <<= nm.mcal(c="round(${c},1)", a="i")
 	f <<= nm.mcut(f="date,i", o="%s"%oFile)
 	f.run()
+
+
+os.system("mkdir -p ./DATA/")
 
 mkData("./DATA/price_large.csv")
 mkIndex("./DATA/index.csv","./DATA/price_large.csv")
