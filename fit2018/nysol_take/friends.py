@@ -3,11 +3,13 @@
 import os
 import sys
 import networkx as nx
+
+import matplotlib
+matplotlib.use('Agg') # 追加
 import matplotlib.pyplot as plt
 
-import nysol.mod as nm
-##### import nysol.mcmd as nm
-from nysol.take.mitemset import mitemset
+import nysol.mcmd as nm
+import nysol.take as nt
 from nysol.util.margs import Margs
 ##### 上の2行は、以下に置き換え
 ##### import nysol.take as nt
@@ -27,10 +29,10 @@ f <<= nm.mcut(f="InvoiceNo,StockCode",i=iFile)
 f <<= nm.muniq(k="InvoiceNo,StockCode",o="%s/tra.csv"%oPath)
 f.run(msg="on")
 
-args=Margs(["dummy","S=100","tid=InvoiceNo","item=StockCode","i=%s/tra.csv"%oPath,"O=%s"%oPath,"l=2","u=2"],"i=,x=,O=,tid=,item=,class=,taxo=,type=,s=,S=,sx=,Sx=,g=,p=,-uniform,l=,u=,top=,T=,-replaceTaxo")
-mitemset(args).run()
+#args=Margs(["dummy","S=100","tid=InvoiceNo","item=StockCode","i=%s/tra.csv"%oPath,"O=%s"%oPath,"l=2","u=2"],"i=,x=,O=,tid=,item=,class=,taxo=,type=,s=,S=,sx=,Sx=,g=,p=,-uniform,l=,u=,top=,T=,-replaceTaxo")
+#mitemset(args).run()
 ##### 上の2行は、以下で動くようにする
-##### nt.mitemset(S=100,tid="invoiceNo",item="StockCode",l=2,u=2,i="%s/tra.csv"%oPath,O=oPath).run()
+nt.mitemset(S=100,tid="InvoiceNo",item="StockCode",l=2,u=2,i="%s/tra.csv"%oPath,O=oPath).run()
 
 # patterns.csv
 # pid,size,count,total,support%0nr,lift,pattern
@@ -44,9 +46,9 @@ f <<= nm.msplit(f="pattern",a="item1,item2",i="%s/patterns.csv"%oPath)
 f <<= nm.mcut(f="item1,item2,lift",o="%s/rules.csv"%oPath)
 f.run(msg="on")
 
-os.system("mfriends.rb ef=item1,item2 ei=%s/rules.csv ef=item1,item2 sim=lift rank=5 eo=%s/friends.csv -udout"%(oPath,oPath))
+#os.system("mfriends.rb ef=item1,item2 ei=%s/rules.csv ef=item1,item2 sim=lift rank=5 eo=%s/friends.csv -udout"%(oPath,oPath))
 ##### 上の行は、以下で動くようにする
-##### nt.mfriends(ef="item1,item2", ei="rules.csv", ef="item1,item2", sim="lift", rank=5, udout=True, eo="%s/friends.csv"%oPath).run()
+nt.mfriends(ef="item1,item2",ei="%s/rules.csv"%oPath,sim="lift", rank=5, udout=True, eo="%s/friends.csv"%oPath).run()
 
 # visualization of the graph
 f=None

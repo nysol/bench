@@ -5,7 +5,7 @@ import sys
 import time
 from pprint import pprint
 
-from nysol.take.extcore import lcm
+import nysol.take.extcore as ntc
 import Orange
 from orangecontrib.associate.fpgrowth import *
 
@@ -17,7 +17,7 @@ os.system("mkdir -p %s"%(oPath))
 oFile="%s/bench_%d.txt"%(oPath,loop)
 
 def L1(iFile,minFreq):
-	lcm(type="Ff",sup=minFreq,i=iFile,o="xxrsl11")
+	ntc.lcm(type="Ff",sup=minFreq,i=iFile,o="xxrsl11")
 
 def O1(iFile,minFreq):
 	tbl = Orange.data.Table(iFile)
@@ -34,8 +34,8 @@ params.append(["L1" ,  10,"%s/onlineT_size10.csv"%iPath])
 params.append(["O1" ,  10,"%s/onlineO_size10.basket"%iPath])
 params.append(["L1" , 100,"%s/onlineT_size100.csv"%iPath])
 params.append(["O1" , 100,"%s/onlineO_size100.basket"%iPath])
-params.append(["L1" ,1000,"%s/onlineT_size1000.csv"%iPath])
-params.append(["O1" ,1000,"%s/onlineO_size1000.basket"%iPath])
+#params.append(["L1" ,1000,"%s/onlineT_size1000.csv"%iPath])
+#params.append(["O1" ,1000,"%s/onlineO_size1000.basket"%iPath])
 
 for param in params:
 	func   =param[0]

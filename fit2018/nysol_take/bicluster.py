@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-/
 import os
 import sys
-import nysol.mod as nm
-##### import nysol.mcmd as nm
+#import nysol.mod as nm
+import nysol.mcmd as nm
+import nysol.take as nt
 
 iFile=("./DATA/online_all.csv")
 oPath=("./OUTPUT/bicluster")
@@ -18,16 +19,16 @@ f <<= nm.mselnum(f="freq",c='[5,]',o="%s/bipartiteGraph.csv"%oPath)
 f.run()
 
 # biclusterig on the bipartite graph non-polished
-os.system("mbiclique.rb ei=%s/bipartiteGraph.csv ef=StockCode,CustomerID o=%s/clique_non-polish.csv"%(oPath,oPath))
+#os.system("mbiclique.rb ei=%s/bipartiteGraph.csv ef=StockCode,CustomerID o=%s/clique_non-polish.csv"%(oPath,oPath))
 ##### 上の行を下で置き換える
-##### nt.mbiclique(ei="%s/bipartiteGraph.csv"%oPath, ef="StockCode,CustomerID", o="%s/clique_non-polish.csv"%oPath).run()
+nt.mbiclique(ei="%s/bipartiteGraph.csv"%oPath, ef="StockCode,CustomerID", o="%s/clique_non-polish.csv"%oPath).run()
 
 # biclusterig on the bipartite graph polished
-os.system("mbipolish.rb ei=%s/bipartiteGraph.csv ef=StockCode,CustomerID sim=R th=0.3 eo=%s/bipartiteGraphPolish.csv"%(oPath,oPath))
-os.system("mbiclique.rb ei=%s/bipartiteGraphPolish.csv ef=StockCode,CustomerID o=%s/clique_polish.csv"%(oPath,oPath))
+#os.system("mbipolish.rb ei=%s/bipartiteGraph.csv ef=StockCode,CustomerID sim=R th=0.3 eo=%s/bipartiteGraphPolish.csv"%(oPath,oPath))
+#os.system("mbiclique.rb ei=%s/bipartiteGraphPolish.csv ef=StockCode,CustomerID o=%s/clique_polish.csv"%(oPath,oPath))
 ##### 上の2行を下2行で置き換える
-##### nt.mbipolish(ei="%s/bipartiteGraph.csv"%oPath, ef="StockCode,CustomerID", sim="R", th=0.3, eo="%s/bipartiteGraphPolish.csv"%oPath).run( )
-##### nt.mbiclique(ei="%s/bipartiteGraphPolish.csv"%oPath,ef="StockCode,CustomerID", o=”%s/clique_polish.csv"%oPath).run()
+nt.mbipolish(ei="%s/bipartiteGraph.csv"%oPath, ef="StockCode,CustomerID", sim="R", th=0.3, eo="%s/bipartiteGraphPolish.csv"%oPath).run( )
+nt.mbiclique(ei="%s/bipartiteGraphPolish.csv"%oPath,ef="StockCode,CustomerID", o="%s/clique_polish.csv"%oPath).run()
 
 # histogram by cluster size of CustomerID (non-polish)
 f=None

@@ -1,8 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-/estimation.csv 
 import os
-import nysol.mod as nm
-##### nysol.mcmd
+import nysol.mcmd as nm
 
 os.environ["KG_VerboseLevel"]="3"
 debug="on"

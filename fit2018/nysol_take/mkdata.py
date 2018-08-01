@@ -5,8 +5,7 @@ import xlrd
 from numpy.random import *
 from datetime import datetime,timedelta
 import urllib.request
-import nysol.mod as nm
-##### import nysol.mcmd as nm
+import nysol.mcmd as nm
 
 debug="on"
 datPath="./DATA"
@@ -98,6 +97,7 @@ def enlarge(scale):
 	oFile="%s/onlineT_size%d.csv"%(datPath,scale)
 	with open(oFile,"w") as fpw:
 		for i in range(scale):
+			ll =0
 			for line in nm.mcut(f=0,nfni=True,i=iFile):
 				if i==0:
 					fpw.write(line[0]+"\n")
@@ -105,7 +105,8 @@ def enlarge(scale):
 					items=line[0].split(" ")
 					newItems=jitter(items)
 					fpw.write(" ".join(newItems)+"\n")
-		
+			print(i)
+
 	# data for Orange
 	iFile="%s/onlineT_size%d.csv"%(datPath,scale)
 	oFile="%s/onlineO_size%d.basket"%(datPath,scale)
@@ -119,7 +120,7 @@ xlsx2tsv()
 mkCSV()
 toNum()
 
-enlarge(10)
-enlarge(100)
+#enlarge(10)
+#enlarge(100)
 enlarge(1000)
 

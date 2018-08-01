@@ -9,8 +9,7 @@ from glob import glob
 
 import pandas as pd
 import math
-import nysol.mod as nm
-##### import nysol.mcmd as nm
+import nysol.mcmd as nm
 
 loop=5
 
@@ -105,7 +104,6 @@ params.append(["nm2a",small])
 params.append(["pd3" ,small])
 params.append(["pd3a",small])
 params.append(["nm3" ,small])
-
 params.append(["pd1" ,middle])
 params.append(["nm1" ,middle])
 params.append(["pd2" ,middle])
