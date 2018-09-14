@@ -47,7 +47,7 @@ def mkIndex(oFile,iFile):
 
 os.system("mkdir -p ./DATA/")
 
-#mkData("./DATA/price_large.csv")
+mkData("./DATA/price_large.csv")
 mkIndex("./DATA/index.csv","./DATA/price_large.csv")
 
 nm.mselnum(f="date",c="[20171225,]",i="./DATA/price_large.csv",o="./DATA/price_middle.csv").run()

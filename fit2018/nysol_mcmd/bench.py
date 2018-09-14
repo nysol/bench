@@ -24,24 +24,20 @@ def pd1(iFile):
 	df = pd.read_csv(iFile)
 	dfg=df.groupby("date")
 	r = dfg.mean(numeric_only = True)
-	#print(r)
 
 def nm1(iFile):
 	r = nm.mhashsum(k="date",f="o,h,l,c",i=iFile).run()
-	#print(r)
 
 def nm1a(iPath):
 	fs=[]
 	for iFile in glob("%s/*"%iPath):
 		fs.append(nm.mhashsum(f="o,h,l,c",i=iFile))
 	r=nm.runs(fs)
-	#print(r)
 
 def pd2(iFile):
 	df=pd.read_csv(iFile,dtype=t,usecols=['id','date','c'])
 	df_id=df.groupby("id", sort=False).apply(lambda x: x.sort_values(["date"])).reset_index(drop=True)
 	r=df_id.groupby("id", sort=False).rolling(on="date",window=3, min_periods=3).mean()
-	#print(r)
 
 def nm2(iFile):
 	f=None
@@ -50,7 +46,6 @@ def nm2(iFile):
 	f <<= nm.mavg(k="id,win",f="c")
 	f <<= nm.writelist(dtype="win:int,date:int,c:float")
 	r=f.run()
-	#print(r)
 
 def nm2a(iFile):
 	f=None
@@ -58,7 +53,6 @@ def nm2a(iFile):
 	f <<= nm.mwindow(k="id",wk="date:win",t=3)
 	f <<= nm.mavg(k="id,win",f="c",o="%s/output_nm2.csv"%oPath)
 	r=f.run()
-	#print(r)
 
 
 def pd3(iFile):
@@ -119,7 +113,7 @@ params.append(["nm1a","%s/sep"%iPath])
 params.append(["pd2" ,large])
 params.append(["nm2" ,large])
 params.append(["nm2a",large])
-params.append(["pd3" ,large])
+#params.append(["pd3" ,large])
 params.append(["pd3a",large])
 params.append(["nm3" ,large])
 
@@ -133,6 +127,7 @@ for param in params:
 		st=time.time()
 		eval(func+'("%s")'%iFile)
 		sec[name].append(time.time()-st)
+		print("loop",i,time.time()-st)
 	mean[name]=0
 	for i in range(loop):
 		mean[name]+=sec[name][i]
