@@ -26,12 +26,12 @@ def pd1(iFile):
 	r = dfg.mean(numeric_only = True)
 
 def nm1(iFile):
-	r = nm.mhashsum(k="date",f="o,h,l,c",i=iFile).run()
+	r = nm.mhashavg(k="date",f="o,h,l,c",i=iFile).run()
 
 def nm1a(iPath):
 	fs=[]
 	for iFile in glob("%s/*"%iPath):
-		fs.append(nm.mhashsum(f="o,h,l,c",i=iFile))
+		fs.append(nm.mhashavg(f="o,h,l,c",i=iFile))
 	r=nm.runs(fs)
 
 def pd2(iFile):
