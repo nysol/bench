@@ -20,7 +20,7 @@ def mkdata(rowSize,oFile):
 	f <<= nm.mcal(c='right(t2s(0t000000+randi(0,86399,133)),6)', a="time", o=oFile)
 	f.run()
 
-oPath="./rand/"
+oPath="./DATA"
 os.system("mkdir -p %s"%oPath)
 
 for size in [10000,1000000,100000000]:
